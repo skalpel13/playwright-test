@@ -6,9 +6,9 @@ const logout = '//a[@class="button secondary radius"]'
 const flashMessage = '//div[@id="flash"]'
 const closeFlash = '//a[@class="close"]'
 const flashLogoutText = 'You logged out of the secure area!'
-const text = 'div[@id="content"//h4]'
+const text = '//div[@id="content"]//h4'
 const exampleText='Welcome to the Secure Area. When you are done click logout below.'
-const title = 'div[@id="content"//h2]'
+const title = '//div[@class="example"]//h2'
 const exampleTitle='Secure Area'
 const loginData = {
     username: 'tomsmith',
