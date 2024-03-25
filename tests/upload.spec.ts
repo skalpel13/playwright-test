@@ -2,15 +2,14 @@ import { test, expect } from '@playwright/test';
 import UploadPage from '../pages/upload.page';
 import path from 'path';
 
-let uploadPage: UploadPage;
-
-test.beforeEach(async ({ page }) => {
-    uploadPage = new UploadPage(page)
-    await uploadPage.navigate()
-    
-  });
-
 test.describe('Upload', ()=>{
+    let uploadPage: UploadPage;
+
+    test.beforeEach(async ({ page }) => {
+        uploadPage = new UploadPage(page)
+        await uploadPage.navigate()
+        
+      });
     
     test('Show page', async({page})=>{
         uploadPage = new UploadPage(page)

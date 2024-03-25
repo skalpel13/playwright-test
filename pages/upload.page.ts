@@ -17,6 +17,6 @@ export default class UploadPage {
     }
 
     async navigate():Promise<void>{
-        await this.page.goto('https://the-internet.herokuapp.com/upload')
+        await this.page.goto('/upload')
     }
 }

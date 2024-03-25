@@ -9,16 +9,15 @@ const loginData = {
     username: 'tomsmith',
     password: 'SuperSecretPassword!'
 }
-let homePage: HomePage;
-
-
-test.beforeEach(async ({ page }) => {
-    homePage = new HomePage(page)
-    await homePage.navigate()
-    
-  });
 
 test.describe('Login', ()=>{
+    let homePage: HomePage;
+
+    test.beforeEach(async ({ page }) => {
+        homePage = new HomePage(page)
+        await homePage.navigate()
+        
+      });
     
     test('Show title', async({page})=>{
         await expect(page).toHaveTitle('The Internet')

@@ -24,7 +24,7 @@ export default class HomePage{
     }
 
     async navigate():Promise<void>{
-        await this.page.goto('https://the-internet.herokuapp.com/login')
+        await this.page.goto('/login')
     }
     async verifyFlashClass(className: string):Promise<void>{
         await expect(this.flashMessage).toHaveClass(className)
