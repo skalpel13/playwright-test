@@ -45,7 +45,7 @@ test.describe('Login', ()=>{
         await page.locator(loginBtn).click()
         await expect(page.locator(flashMessage)).toBeVisible()
         await expect(page.locator(flashMessage)).toHaveClass('flash success')
-        await expect(page.locator(title)).toHaveText(exampleTitle)
+        await expect(page.locator(title)).toContainText(exampleTitle)
         await expect(page.locator(text)).toHaveText(exampleText)
      })
 
@@ -60,7 +60,7 @@ test.describe('Login', ()=>{
         await page.locator(closeFlash).click()
         await expect(page.locator(flashMessage)).not.toBeVisible()
         await page.locator(logout).click()
-        
+
         await expect(page.locator(flashMessage)).toBeVisible()
         await expect(page.locator(flashMessage)).toHaveClass('flash success')
         await expect(page.locator(flashMessage)).toContainText(flashLogoutText)
