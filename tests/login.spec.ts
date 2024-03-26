@@ -1,75 +1,72 @@
 import { test, expect } from '@playwright/test';
 import HomePage from '../pages/login.page';
 
-
-const flashLogoutText = 'You logged out of the secure area!'
-const exampleText='Welcome to the Secure Area. When you are done click logout below.'
-const exampleTitle='Secure Area'
+const flashLogoutText = 'You logged out of the secure area!';
+const exampleText = 'Welcome to the Secure Area. When you are done click logout below.';
+const exampleTitle = 'Secure Area';
 const loginData = {
-    username: 'tomsmith',
-    password: 'SuperSecretPassword!'
-}
+  username: 'tomsmith',
+  password: 'SuperSecretPassword!',
+};
 
-test.describe('Login', ()=>{
-    let homePage: HomePage;
+test.describe('Login', () => {
+  let homePage: HomePage;
 
-    test.beforeEach(async ({ page }) => {
-        homePage = new HomePage(page)
-        await homePage.navigate()
-        
-      });
-    
-    test('Show title', async({page})=>{
-        await expect(page).toHaveTitle('The Internet')
-    })
+  test.beforeEach(async ({ page }) => {
+    homePage = new HomePage(page);
+    await homePage.navigate();
+  });
 
-    test('Input visible', async({page})=>{
-        homePage = new HomePage(page)
+  test('Show title', async ({ page }) => {
+    await expect(page).toHaveTitle('The Internet');
+  });
 
-        await expect(homePage.loginInput).toBeVisible()
-        await expect(homePage.passwordInput).toBeVisible()
-    })
+  test('Input visible', async ({ page }) => {
+    homePage = new HomePage(page);
 
-    test('Input credits', async({page})=>{
-        homePage = new HomePage(page)
+    await expect(homePage.loginInput).toBeVisible();
+    await expect(homePage.passwordInput).toBeVisible();
+  });
 
-        await homePage.loginInput.fill(loginData.username)
-        await homePage.passwordInput.fill(loginData.password)
-        await homePage.loginBtn.click()
-        await page.waitForURL('https://the-internet.herokuapp.com/secure')
-        await expect(homePage.flashMessage).toBeVisible()
-        await expect(homePage.flashMessage).toHaveClass('flash success')
-    })
+  test('Input credits', async ({ page }) => {
+    homePage = new HomePage(page);
 
-    test('Log Out page', async({page})=>{
-        homePage = new HomePage(page)
+    await homePage.loginInput.fill(loginData.username);
+    await homePage.passwordInput.fill(loginData.password);
+    await homePage.loginBtn.click();
+    await page.waitForURL('https://the-internet.herokuapp.com/secure');
+    await expect(homePage.flashMessage).toBeVisible();
+    await expect(homePage.flashMessage).toHaveClass('flash success');
+  });
 
-        await homePage.loginInput.fill(loginData.username)
-        await homePage.passwordInput.fill(loginData.password)
-        await homePage.loginBtn.click()
-        await expect(homePage.flashMessage).toBeVisible()
-        await homePage.verifyFlashClass('flash success')
-        await expect(homePage.title).toContainText(exampleTitle)
-        await expect(homePage.text).toHaveText(exampleText)
-     })
+  test('Log Out page', async ({ page }) => {
+    homePage = new HomePage(page);
 
-    test('Log Out from page', async({page})=>{
-        homePage = new HomePage(page)
+    await homePage.loginInput.fill(loginData.username);
+    await homePage.passwordInput.fill(loginData.password);
+    await homePage.loginBtn.click();
+    await expect(homePage.flashMessage).toBeVisible();
+    await homePage.verifyFlashClass('flash success');
+    await expect(homePage.title).toContainText(exampleTitle);
+    await expect(homePage.text).toHaveText(exampleText);
+  });
 
-        await homePage.loginInput.fill(loginData.username)
-        await homePage.passwordInput.fill(loginData.password)
-        await homePage.loginBtn.click()
+  test('Log Out from page', async ({ page }) => {
+    homePage = new HomePage(page);
 
-        await expect(homePage.flashMessage).toBeVisible()
-        await homePage.verifyFlashClass('flash success')
+    await homePage.loginInput.fill(loginData.username);
+    await homePage.passwordInput.fill(loginData.password);
+    await homePage.loginBtn.click();
 
-        await homePage.closeFlashBtn.click()
-        await expect(homePage.flashMessage).toBeHidden()
-        await homePage.logoutBtn.click()
+    await expect(homePage.flashMessage).toBeVisible();
+    await homePage.verifyFlashClass('flash success');
 
-        await expect(homePage.flashMessage).toBeVisible()
-        await homePage.verifyFlashClass('flash success')
-        await expect(homePage.flashMessage).toContainText(flashLogoutText)
-     })
-    
-})
+    await homePage.closeFlashBtn.click();
+    await expect(homePage.flashMessage).toBeHidden();
+    await homePage.logoutBtn.click();
+
+    await expect(homePage.flashMessage).toBeVisible();
+    await homePage.verifyFlashClass('flash success');
+    await expect(homePage.flashMessage).toContainText(flashLogoutText);
+  });
+});
